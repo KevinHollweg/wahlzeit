@@ -69,6 +69,11 @@ public class Photo extends DataObject {
 
 	protected PhotoId id = null;
 	
+	/** 
+	 * Photo Locaion
+	 */
+	public static final Location PHOTO_LOCATION = new Location(); 
+	
 	/**
 	 *
 	 */
