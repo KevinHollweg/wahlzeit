@@ -17,11 +17,11 @@ public class Location {
 	
 	public Coordinate coordinates;
 	
-	public Location(){
+	public Location() {
 		this.coordinates = new Coordinate(0.0, 0.0, 0.0);
 	}
 	
-	public Location(double myX, double myY, double myZ){
+	public Location(double myX, double myY, double myZ) {
 		this.coordinates = new Coordinate(myX, myY, myZ);
 	}
 	

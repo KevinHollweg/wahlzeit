@@ -15,29 +15,29 @@ import org.wahlzeit.services.ObjectManager;
 @Entity
 public class Coordinate {
 	
-	protected double x;
-	protected double y;
-	protected double z;
+	private double x;
+	private double y;
+	private double z;
 	
-	public Coordinate(double x, double y, double z){
+	public Coordinate(double x, double y, double z) {
 		this.x = x;
 		this.y = y;
 		this.z = z;
 	}
 	
-	public double getX(){
+	public double getX() {
 		return this.x;
 	}
 	
-	public double getY(){
+	public double getY() {
 		return this.y;
 	}
 	
-	public double getZ(){
+	public double getZ() {
 		return this.z;
 	}
 	
-	public double getDistance(Coordinate coords){
+	public double getDistance(Coordinate coords) {
 		double x2 = (coords.getX() - this.x);
 		double y2 = (coords.getY() - this.y);
 		double z2 = (coords.getZ() - this.z);
@@ -46,11 +46,11 @@ public class Coordinate {
 		return distance;
 	}
 	
-	public boolean equals(Coordinate coords){
+	public boolean equals(Coordinate coords) {
 		return isEqual(coords);
 	}
 	
-	public boolean isEqual(Coordinate coords){
+	public boolean isEqual(Coordinate coords) {
 		if((this.x == coords.getX())&&(this.y == coords.getY()) && (this.z == coords.getZ())){
 			return true;
 		} else{
