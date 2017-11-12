@@ -72,7 +72,7 @@ public class Photo extends DataObject {
 	/** 
 	 * Photo Location
 	 */
-	public static final Location PHOTO_LOCATION = new Location(); 
+	public Location PHOTO_LOCATION = new Location(); 
 	
 	/**
 	 *
@@ -143,7 +143,7 @@ public class Photo extends DataObject {
 		id = PhotoId.getNextId();
 		incWriteCount();
 	}
-
+	
 	/**
 	 * @methodtype constructor
 	 */

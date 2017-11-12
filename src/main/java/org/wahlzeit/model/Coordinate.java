@@ -1,16 +1,8 @@
 package org.wahlzeit.model;
 
-import com.google.api.client.util.ArrayMap;
-import com.google.appengine.api.datastore.Key;
-import com.google.appengine.api.images.Image;
+
 import com.googlecode.objectify.annotation.Entity;
-import com.googlecode.objectify.annotation.Id;
-import com.googlecode.objectify.annotation.Ignore;
-import com.googlecode.objectify.annotation.Parent;
-import org.wahlzeit.services.DataObject;
-import org.wahlzeit.services.EmailAddress;
-import org.wahlzeit.services.Language;
-import org.wahlzeit.services.ObjectManager;
+
 
 @Entity
 public class Coordinate {
@@ -20,7 +12,7 @@ public class Coordinate {
 	private double z;
 	
 	/**
-	 *  \brief constructor, takes x, y, z values as parameters 
+	 * constructor, takes x, y, z values as parameters 
 	 * @param x
 	 * @param y
 	 * @param z
@@ -32,7 +24,7 @@ public class Coordinate {
 	}
 	
 	/**
-	 *  \brief getter method for x value 
+	 * getter method for x value 
 	 * @return x
 	 */
 	public double getX() {
@@ -40,7 +32,7 @@ public class Coordinate {
 	}
 	
 	/**
-	 *  \brief getter method for y value 
+	 * getter method for y value 
 	 * @return y
 	 */
 	public double getY() {
@@ -48,7 +40,7 @@ public class Coordinate {
 	}
 	
 	/**
-	 *  \brief getter method for z value 
+	 * getter method for z value 
 	 * @return z
 	 */
 	public double getZ() {
@@ -56,42 +48,53 @@ public class Coordinate {
 	}
 	
 	/**
-	 *  \brief method to calculate the distance between given and and own coordinates
+	 *  method to calculate the distance between given and and own coordinates
 	 * @param coords
-	 * @return the calculated distance
+	 * @return the calculated distance, -1.0, if coords is invalid
 	 */
 	public double getDistance(Coordinate coords) {
-		double x2 = (coords.getX() - this.x);
-		double y2 = (coords.getY() - this.y);
-		double z2 = (coords.getZ() - this.z);
-		double underRoot = (x2 * x2) + (y2 * y2) + (z2 * z2);
+		if(coords == null) {
+			return -1.0;
+		}
+		double deltaX = (coords.getX() - this.x);
+		double deltaY = (coords.getY() - this.y);
+		double deltaZ = (coords.getZ() - this.z);
+		double underRoot = (deltaX * deltaX) + (deltaY * deltaY) + (deltaZ * deltaZ);
 		double distance = Math.sqrt(underRoot);
 		return distance;
 	}
 	
 	/**
-	 *  \brief method to forward the java.lang.object method equals() to the implemented method isEqual()
+	 *  method to forward the java.lang.object method equals() to the implemented method isEqual()
 	 *  @param obj
 	 *  @return true, if given object is the same as referenced object, false otherwise
 	 */
 	@Override
 	public boolean equals(Object obj) {
-		if(obj instanceof Coordinate){
+		if(obj == null) {
+			return false;
+		} else if(obj == this){
+			return true;
+		} else if(obj instanceof Coordinate) {
 			return isEqual((Coordinate) obj);
-		} else{
+		} else {
 			return false;
 		}
 	}
 	
 	/**
-	 *  \brief method to check if the given coordinate object is the same as the referenced coordinate object
+	 * method to check if the given coordinate object is the same as the referenced coordinate object
 	 * @param coords
 	 * @return true, if both coordinate objects are the same, false otherwise
 	 */
 	public boolean isEqual(Coordinate coords) {
-		if((this.x == coords.getX())&&(this.y == coords.getY()) && (this.z == coords.getZ())){
+		if(coords == null) {
+			return false;
+		} else if(coords == this){
 			return true;
-		} else{
+		} else if((Math.abs(coords.getX() - this.x) < 0.00000001) && (Math.abs(coords.getY() - this.y) < 0.00000001) && (Math.abs(coords.getZ() - this.z) < 0.00000001)) {
+			return true;
+		} else {
 			return false;
 		}
 	}
