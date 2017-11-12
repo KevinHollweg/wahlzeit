@@ -43,7 +43,7 @@ public class CoordinateTest {
 		double distance1 = Math.sqrt(((2.0 - 3.0) * (2.0 - 3.0)) + ((3.0 - 5.0) * (3.0 - 5.0)) + ((4.0 - 1.0) * (4.0 - 1.0)));
 		assertEquals(distance0, baseCoordinate.getDistance(distant), 0.0001);
 		assertEquals(distance1, customCoordinate.getDistance(distant), 0.0001);
-		assertEquals(distant.getDistance(null), 1.0, 0.1);
+		assertEquals(distant.getDistance(null), -1.0, 0.1);
 		
 	}
 	
