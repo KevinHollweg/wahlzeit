@@ -36,7 +36,7 @@ public class PersistPhotoAgent extends HttpServlet {
 			//Photo photo = PhotoManager.getInstance().getPhoto(id);
 			Photo photo = CollectorsEditionPhotoManager.getInstance().getPhoto(id);
 			if (photo != null) {
-				PhotoManager.getInstance().savePhoto(photo);
+				CollectorsEditionPhotoManager.getInstance().savePhoto(photo);
 				log.config(LogBuilder.createSystemMessage().addMessage("Photo saved.").toString());
 			} else {
 				response.setStatus(299);
