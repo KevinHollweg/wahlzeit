@@ -58,9 +58,10 @@ dependencies {
 }
 
 test {
-    filter {
-        includeTestsMatching "org.wahlzeit.*"
-    }
+    //filter {
+    //    includeTestsMatching "org.wahlzeit.*"
+    //}
+    "org.wahlzeit.model.WahlzeitTestSuite"
 }
 
 appengine {

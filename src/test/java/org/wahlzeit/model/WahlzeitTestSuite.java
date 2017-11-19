@@ -9,7 +9,8 @@ import org.wahlzeit.services.mailing.*;
 @Suite.SuiteClasses({
 	InteractionTestSuite.class,
 	EmailServiceTestSuite.class,
-	FunctionalityTestSuite.class	
+	FunctionalityTestSuite.class,
+	CoordinateTestSuite.class
 })
 
 public class WahlzeitTestSuite {

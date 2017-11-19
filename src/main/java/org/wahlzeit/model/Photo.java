@@ -72,7 +72,7 @@ public class Photo extends DataObject {
 	/** 
 	 * Photo Location
 	 */
-	public static final Location PHOTO_LOCATION = new Location(); 
+	//public Location photoLocation = new Location(); 
 	
 	/**
 	 *

@@ -9,7 +9,6 @@ import org.wahlzeit.utils.*;
 @RunWith(Suite.class)
 
 @Suite.SuiteClasses({
-	LocationCoordinateTest.class,
 	PhotoFilterTest.class,
 	ValueTest.class,
 	DatastoreAdapterTest.class,

@@ -48,9 +48,9 @@ public class PhotoManager extends ObjectManager {
 	/**
 	 *
 	 */
-	protected static final PhotoManager instance = new PhotoManager();
+	protected static final PhotoManager instance = new CollectorsEditionPhotoManager();
 
-	private static final Logger log = Logger.getLogger(PhotoManager.class.getName());
+	private static final Logger log = Logger.getLogger(CollectorsEditionPhotoManager.class.getName());
 
 	/**
 	 * In-memory cache for photos
