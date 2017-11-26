@@ -5,7 +5,7 @@ import com.googlecode.objectify.annotation.Entity;
 
 
 @Entity
-public class CartesianCoordinate implements Coordinate{
+public class CartesianCoordinate extends AbstractCoordinate{
 	
 	private double x;
 	private double y;
@@ -47,25 +47,6 @@ public class CartesianCoordinate implements Coordinate{
 		return this.z;
 	}
 	
-
-	/**
-	 *  method to forward the java.lang.object method equals() to the implemented method isEqual()
-	 *  @param obj
-	 *  @return true, if given object is the same as referenced object, false otherwise
-	 */
-	@Override
-	public boolean equals(Object obj) {
-		if(obj == null) {
-			return false;
-		} else if(obj == this){
-			return true;
-		} else if(obj instanceof CartesianCoordinate) {
-			return isEqual((Coordinate) obj);
-		} else {
-			return false;
-		}
-	}
-	
 	/**
 	 * method to check if the given coordinate object is the same as the referenced coordinate object
 	 * @param coords
@@ -85,14 +66,18 @@ public class CartesianCoordinate implements Coordinate{
 			return false;
 		}
 	}
-
+	
+	/**
+	 *  method to convert this coordinate to a cartesian coordinate
+	 *  @return the cartesian representation of this point
+	 */
 	@Override
 	public CartesianCoordinate asCartesianCoordinate() {
 		return this;
 	}
 	
 	/**
-	 *  method to calculate the distance between given and and own coordinates
+	 *  method to calculate the cartesian distance between given and and own coordinates
 	 * @param coords
 	 * @return the calculated distance, -1.0, if coords is invalid
 	 */
@@ -114,6 +99,10 @@ public class CartesianCoordinate implements Coordinate{
 		return distance;
 	}
 
+	/**
+	 *  method to convert this coordinate to a spheric coordinate
+	 *  @return the spheric representation of this point
+	 */
 	@Override
 	public SphericCoordinate asSphericCoordinate() {
 		double radius = Math.sqrt(this.x * this.x + this.y * this.y + this.z * this.z);
@@ -132,6 +121,11 @@ public class CartesianCoordinate implements Coordinate{
 		return new SphericCoordinate(latitude, longitude, radius);
 	}
 
+	/**
+	 *  method to calculate the spheric distance between given and and own coordinates
+	 * @param coords
+	 * @return the calculated distance, -1.0, if coords is invalid
+	 */
 	@Override
 	public double getSphericDistance(Coordinate coords) {
 		SphericCoordinate spherCoords = this.asSphericCoordinate();
@@ -139,7 +133,17 @@ public class CartesianCoordinate implements Coordinate{
 	}
 
 	@Override
-	public double getDistance(Coordinate coords) {
-		return getCartesianDistance(coords);
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		long temp;
+		temp = Double.doubleToLongBits(x);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(y);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(z);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		return result;
 	}
+
 }

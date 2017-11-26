@@ -6,23 +6,45 @@ import com.googlecode.objectify.annotation.Entity;
 @Entity
 public class Location {
 	
-	public Coordinate coordinates;
+	public Coordinate coordinate;
 	
 	/**
-	 *  \brief default constructor
+	 *  default constructor
 	 */
 	public Location() {
-		this.coordinates = new CartesianCoordinate(0.0, 0.0, 0.0);
+		this.coordinate = new CartesianCoordinate(0.0, 0.0, 0.0);
 	}
 	
 	/**
-	 *  \brief constructor to which coordinates can be given
+	 *  constructor to create a Location object with custom Cartesian coordinates
 	 * @param myX
 	 * @param myY
 	 * @param myZ
 	 */
 	public Location(double myX, double myY, double myZ) {
-		this.coordinates = new CartesianCoordinate(myX, myY, myZ);
+		this.coordinate = new CartesianCoordinate(myX, myY, myZ);
+	}
+	
+	/**
+	 *  constructor to create a Location object with custom Spheric coordinates
+	 *  the earths radius is used as radius
+	 * @param myLatitude
+	 * @param myLongitude
+	 */
+	public Location(double myLatitude, double myLongitude) {
+		this.coordinate = new SphericCoordinate(myLatitude, myLongitude, 6378.137);
+	}
+	
+	/**
+	 * @methodtype setter for coordinate attribute
+	 * @param coords
+	 */
+	public void setCoordinate(Coordinate coords) {
+		this.coordinate = coords;
+	}
+	
+	public Coordinate getCoordinate() {
+		return this.coordinate;
 	}
 	
 }

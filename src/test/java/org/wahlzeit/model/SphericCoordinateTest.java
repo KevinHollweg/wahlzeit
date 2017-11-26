@@ -41,9 +41,9 @@ public class SphericCoordinateTest {
 		SphericCoordinate distant = new SphericCoordinate(5.0, 3.0, 1.0);
 		double distance0 = 1 * Math.acos(Math.sin(0.0) * Math.sin(5.0) + Math.cos(0.0) * Math.cos(5.0 * Math.cos(Math.abs(0.0 - 3.0))));
 		double distance1 = 1 * Math.acos(Math.sin(2.0) * Math.sin(5.0) + Math.cos(2.0) * Math.cos(5.0 * Math.cos(Math.abs(3.0 - 3.0))));
-		assertEquals(distance0, baseCoordinate.getDistance(distant), 0.0000001);
-		assertEquals(distance1, customCoordinate.getDistance(distant), 0.0000001);
-		assertEquals(distant.getDistance(null), -1.0, 0.1);
+		assertEquals(distance0, baseCoordinate.getSphericDistance(distant), 0.0000001);
+		assertEquals(distance1, customCoordinate.getSphericDistance(distant), 0.0000001);
+		assertEquals(-1.0,distant.getSphericDistance(null), 0.1);
 		
 	}
 	
