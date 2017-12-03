@@ -18,8 +18,8 @@ public class LocationTest {
 	
 	@Test
 	public void testCounstuctor() {
-		assertNotNull(baseLocation.coordinates);
-		assertNotNull(customLocation.coordinates);
+		assertNotNull(baseLocation.coordinate);
+		assertNotNull(customLocation.coordinate);
 		
 	}
 	

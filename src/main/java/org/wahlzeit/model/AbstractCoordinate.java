@@ -2,6 +2,21 @@ package org.wahlzeit.model;
 
 public abstract class AbstractCoordinate implements Coordinate{
 	
+	@Override
+	public abstract CartesianCoordinate asCartesianCoordinate();
+	
+	@Override
+	public abstract double getCartesianDistance(Coordinate coords);
+	
+	@Override
+	public abstract SphericCoordinate asSphericCoordinate();
+	
+	@Override
+	public abstract double getSphericDistance(Coordinate coords);
+	
+	@Override
+	public abstract boolean isEqual(Coordinate coords);
+	
 	/**
 	 *  method to calculate the cartesian distance between a given point a the
 	 *  point on which this method is called

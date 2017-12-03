@@ -14,9 +14,19 @@ public class SphericCoordinate extends AbstractCoordinate{
 	 * @param radius
 	 */
 	public SphericCoordinate(double latitude, double longitude, double radius) {
+		//Precondition
+		assert latitude <= Double.MAX_VALUE : "x value is too large";
+		assert longitude <= Double.MAX_VALUE : "y value is too large";
+		assert radius <= Double.MAX_VALUE : "z value is too large";
+				
 		this.latitude = latitude;
 		this.longitude = longitude;
 		this.radius = radius;
+		
+		//Postcondition
+		assert latitude == this.latitude : "couldn't write varibale x";
+		assert longitude == this.longitude : "couldn't write varibale y";
+		assert radius == this.radius : "couldn't write varibale z";
 	}
 	
 	/**
@@ -25,10 +35,16 @@ public class SphericCoordinate extends AbstractCoordinate{
 	 */
 	@Override
 	public CartesianCoordinate asCartesianCoordinate() {
+		//no Precondition, because no input is given to that function
 		double z = this.radius * Math.cos(this.longitude);
 		double y = this.radius * Math.sin(this.longitude) * Math.sin(this.latitude);
 		double x = this.radius * Math.sin(this.longitude) * Math.cos(this.latitude);
-		return new CartesianCoordinate(x, y, z);
+		CartesianCoordinate result = new CartesianCoordinate(x, y, z);
+		
+		//Postcondition
+		assert result != null : "creation of new CartesianCoordinate object failed";
+		
+		return result;
 	}
 
 	/**
@@ -38,8 +54,16 @@ public class SphericCoordinate extends AbstractCoordinate{
 	 */
 	@Override
 	public double getCartesianDistance(Coordinate coords) {
+		//Precondition
+		assert coords != null : "null was given as method argument";
+		
 		CartesianCoordinate cartCoords = this.asCartesianCoordinate();
-		return cartCoords.getCartesianDistance(cartCoords);
+		double result = cartCoords.getCartesianDistance(cartCoords);
+		
+		//Postcondition
+		assert result >= 0 : "getCartesianDistance() produced an calculation error";
+		
+		return result;
 	}
 
 	/**
@@ -48,6 +72,8 @@ public class SphericCoordinate extends AbstractCoordinate{
 	 */
 	@Override
 	public SphericCoordinate asSphericCoordinate() {
+		//no Precondition, because no input is given to this method 
+		//no Postcondition, because object state isn't changed
 		return this;
 	}
 
@@ -58,6 +84,9 @@ public class SphericCoordinate extends AbstractCoordinate{
 	 */
 	@Override
 	public double getSphericDistance(Coordinate coords) {
+		//Precondition
+		assert coords != null : "null was given as Method argument";
+				
 		SphericCoordinate spherCoords;
 		if( coords == null ){
 			return -1.0;
@@ -68,7 +97,12 @@ public class SphericCoordinate extends AbstractCoordinate{
 		}
 		double deltaAngle = Math.acos(Math.sin(this.latitude) * Math.sin(spherCoords.latitude) +
 				Math.cos(this.latitude) * Math.cos(spherCoords.latitude * Math.cos(Math.abs(this.longitude - spherCoords.longitude))));
-		return this.radius * deltaAngle;
+		double result = this.radius * deltaAngle;
+		
+		//Postcondition
+		assert result >= 0 : "overflow detected";
+		
+		return result;
 	}
 
 	/**
@@ -78,6 +112,7 @@ public class SphericCoordinate extends AbstractCoordinate{
 	 */
 	@Override
 	public boolean isEqual(Coordinate coords) {
+		//no Precondition, because every input can be given to this method 
 		if(coords == null) {
 			return false;
 		}
@@ -89,17 +124,36 @@ public class SphericCoordinate extends AbstractCoordinate{
 		} else {
 			return false;
 		}
+		//no Postcondition, because state of object wasn't changed
 	}
 
+	/**
+	 * getter method for radius value 
+	 * @return radius
+	 */
 	public double getRadius() {
+		//no Precondition, because no input is given to this method 
+		//no Postcondition, because object state isn't changed
 		return radius;
 	}
 
+	/**
+	 * getter method for longitude value 
+	 * @return longitude
+	 */
 	public double getLongitude() {
+		//no Precondition, because no input is given to this method 
+		//no Postcondition, because object state isn't changed
 		return longitude;
 	}
 
+	/**
+	 * getter method for latitude value 
+	 * @return latitude
+	 */
 	public double getLatitude() {
+		//no Precondition, because no input is given to this method 
+		//no Postcondition, because object state isn't changed
 		return latitude;
 	}
 
