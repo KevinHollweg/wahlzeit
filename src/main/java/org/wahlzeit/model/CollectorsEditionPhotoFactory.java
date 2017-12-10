@@ -35,6 +35,10 @@ public class CollectorsEditionPhotoFactory extends PhotoFactory{
 	 * 	 @methodetype set
 	 */
 	protected static synchronized void setInstance(CollectorsEditionPhotoFactory ColEdPhotoFactory) {
+		assert ColEdPhotoFactory != null : "null was given as method argument";
+		if(ColEdPhotoFactory == null){
+			throw new IllegalArgumentException("Null was given as an parameter!");
+		}
 
 		if (instance != null) {
 			throw new IllegalStateException("attempt to initalize CollectorsEditionPhotoFactory twice");
@@ -56,6 +60,10 @@ public class CollectorsEditionPhotoFactory extends PhotoFactory{
 	 */
 	@Override
 	public CollectorsEditionPhoto createPhoto(PhotoId id) {
+		assert id != null : "null was given as method argument";
+		if(id == null){
+			throw new IllegalArgumentException("Null was given as an parameter!");
+		}
 		return new CollectorsEditionPhoto(id);
 	}
 	

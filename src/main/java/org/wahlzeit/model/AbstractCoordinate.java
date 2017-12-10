@@ -25,6 +25,9 @@ public abstract class AbstractCoordinate implements Coordinate{
 	 */
 	@Override
 	public double getDistance(Coordinate coords) {
+		if(coords == null){
+			throw new IllegalArgumentException("Null was given as an parameter!");
+		}
 		return getCartesianDistance(coords);
 	}
 	
@@ -47,4 +50,6 @@ public abstract class AbstractCoordinate implements Coordinate{
 			return false;
 		}
 	}
+	
+	protected abstract void assertClassInvariants();
 }

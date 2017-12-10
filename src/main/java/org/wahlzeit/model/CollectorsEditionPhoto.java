@@ -19,6 +19,10 @@ public class CollectorsEditionPhoto extends Photo{
 	 * @methodtype constructor 
 	 */
 	public CollectorsEditionPhoto(PhotoId myId) {
+		assert myId != null : "null was given as method argument";
+		if(myId == null){
+			throw new IllegalArgumentException("Null was given as an parameter!");
+		}
 		super.id = myId;
 		
 		incWriteCount();
@@ -30,6 +34,10 @@ public class CollectorsEditionPhoto extends Photo{
 	 * @return True, if same owner, false, if not
 	 */
 	public boolean hasSameOwner(CollectorsEditionPhoto ColEdPhoto) {
+		assert ColEdPhoto != null : "null was given as method argument";
+		if(ColEdPhoto == null){
+			throw new IllegalArgumentException("Null was given as an parameter!");
+		}
 		return ColEdPhoto.getOwnerEmailAddress().equals(super.ownerEmailAddress);
 		
 	}
