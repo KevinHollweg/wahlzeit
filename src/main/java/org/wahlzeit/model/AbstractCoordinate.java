@@ -1,5 +1,8 @@
 package org.wahlzeit.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class AbstractCoordinate implements Coordinate{
 	
 	@Override
@@ -16,6 +19,9 @@ public abstract class AbstractCoordinate implements Coordinate{
 	
 	@Override
 	public abstract boolean isEqual(Coordinate coords);
+	
+	//@Override 
+	//public abstract CartesianCoordinate makeCartesianCoordinate(double x, double y, double z);
 	
 	/**
 	 *  method to calculate the cartesian distance between a given point a the
@@ -52,4 +58,7 @@ public abstract class AbstractCoordinate implements Coordinate{
 	}
 	
 	protected abstract void assertClassInvariants();
+	
+	protected static List<Coordinate> CoordinateListCart = new ArrayList<Coordinate>();
+	protected static List<Coordinate> CoordinateListSpher = new ArrayList<Coordinate>();
 }

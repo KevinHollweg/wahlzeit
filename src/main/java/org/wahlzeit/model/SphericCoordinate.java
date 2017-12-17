@@ -7,6 +7,18 @@ public class SphericCoordinate extends AbstractCoordinate{
 	private double longitude;
 	private double radius;
 
+	
+	public static SphericCoordinate makeSphericCoordinate(double latitude, double longitude, double radius) {
+		SphericCoordinate temp = new SphericCoordinate(latitude, longitude, radius);
+		for(int i = 0; i < CoordinateListSpher.size(); i++) {
+			if(temp.isEqual(CoordinateListSpher.get(i))) {
+				return CoordinateListSpher.get(i).asSphericCoordinate();
+			}
+		}
+		CoordinateListSpher.add(temp);
+		return temp;
+	}
+	
 	/**
 	 * constructor, takes x, y, z values as parameters 
 	 * @param latitude
@@ -15,13 +27,10 @@ public class SphericCoordinate extends AbstractCoordinate{
 	 * @pre radius, latitude and longitude are all valid values
 	 * @post SphericCoordinte object is correct created
 	 */
-	public SphericCoordinate(double latitude, double longitude, double radius) {
+	protected SphericCoordinate(double latitude, double longitude, double radius) {
 		//Precondition
-		assert latitude <= Double.MAX_VALUE : "x value is too large";
-		assert longitude <= Double.MAX_VALUE : "y value is too large";
-		assert radius <= Double.MAX_VALUE : "z value is too large";
 		
-		if(latitude <= Double.MAX_VALUE || longitude <= Double.MAX_VALUE || radius <= Double.MAX_VALUE) {
+		if(latitude >= Double.MAX_VALUE || longitude >= Double.MAX_VALUE || radius >= Double.MAX_VALUE) {
 			throw new IllegalArgumentException("The given values aren't vaild!");
 		}
 				
@@ -51,7 +60,6 @@ public class SphericCoordinate extends AbstractCoordinate{
 		CartesianCoordinate result = doAsCartesianCoordinate();
 		
 		//Postcondition
-		assert result != null : "creation of new CartesianCoordinate object failed";
 		if(result == null) {
 			throw new IllegalStateException("Cound not creat new CartesianCoordinate object!");
 		}
@@ -69,7 +77,7 @@ public class SphericCoordinate extends AbstractCoordinate{
 		double z = this.radius * Math.cos(this.longitude);
 		double y = this.radius * Math.sin(this.longitude) * Math.sin(this.latitude);
 		double x = this.radius * Math.sin(this.longitude) * Math.cos(this.latitude);
-		CartesianCoordinate result = new CartesianCoordinate(x, y, z);
+		CartesianCoordinate result =  CartesianCoordinate.makeCartesianCoordinate(x, y, z);
 		return result;
 	}
 
@@ -85,7 +93,6 @@ public class SphericCoordinate extends AbstractCoordinate{
 		//class invariant
 		assertClassInvariants();
 		//Precondition
-		assert coords != null : "null was given as method argument";
 		if(coords == null){
 			throw new IllegalArgumentException("Null was given as an parameter!");
 		}
@@ -94,7 +101,6 @@ public class SphericCoordinate extends AbstractCoordinate{
 		double result = cartCoords.getCartesianDistance(cartCoords);
 		
 		//Postcondition
-		assert result >= 0 : "getCartesianDistance() produced an calculation error";
 		if(result < 0) {
 			throw new IllegalStateException("Distance wasn't calculated correctly!");
 		}
@@ -126,7 +132,6 @@ public class SphericCoordinate extends AbstractCoordinate{
 		//class invariant
 		assertClassInvariants();
 		//Precondition
-		assert coords != null : "null was given as Method argument";
 		if(coords == null){
 			throw new IllegalArgumentException("Null was given as an parameter!");
 		}
@@ -134,7 +139,6 @@ public class SphericCoordinate extends AbstractCoordinate{
 		double result = doGetSphericDistance(coords);
 		
 		//Postcondition
-		assert result >= 0 : "overflow detected";
 		if(result < 0) {
 			throw new IllegalStateException("Distance wasn't calculated correctly!");
 		}
@@ -235,17 +239,17 @@ public class SphericCoordinate extends AbstractCoordinate{
 	 */
 	@Override
 	protected void assertClassInvariants() {
-		assert this.radius != Double.NaN : "No valid value for radius";
-		assert this.radius >= 0 : "Radius negative";
-		assert this.radius < Double.POSITIVE_INFINITY : "Radius too large";
+		if(this.radius == Double.NaN || this.radius < 0 || this.radius > Double.POSITIVE_INFINITY) {
+			throw new IllegalArgumentException("No valid value for radius!");
+		}
 		
-		assert this.latitude != Double.NaN : "No valid value for latitude";
-		assert this.latitude >= 0 : "Latitude negative";
-		assert this.latitude < 360 : "Latitude greater than 2 PI";
+		if(this.latitude == Double.NaN || this.latitude < 0 || this.latitude >= 360) {
+			throw new IllegalArgumentException("No valid value for latitude!");
+		}
 		
-		assert this.longitude != Double.NaN : "No valid value for longitude";
-		assert this.longitude >= 0 : "Longitude negative";
-		assert this.longitude < 180: "Longitude greater than PI";
+		if(this.longitude == Double.NaN || this.longitude < 0 || this.longitude >= 180) {
+			throw new IllegalArgumentException("No valid value for longitude!");
+		}
 	}
 
 }

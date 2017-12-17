@@ -12,7 +12,7 @@ public class Location {
 	 *  default constructor
 	 */
 	public Location() {
-		this.coordinate = new CartesianCoordinate(0.0, 0.0, 0.0);
+		this.coordinate = CartesianCoordinate.makeCartesianCoordinate(0.0, 0.0, 0.0);
 	}
 	
 	/**
@@ -22,7 +22,7 @@ public class Location {
 	 * @param myZ
 	 */
 	public Location(double myX, double myY, double myZ) {
-		this.coordinate = new CartesianCoordinate(myX, myY, myZ);
+		this.coordinate =  CartesianCoordinate.makeCartesianCoordinate(myX, myY, myZ);
 	}
 	
 	/**
@@ -32,7 +32,7 @@ public class Location {
 	 * @param myLongitude
 	 */
 	public Location(double myLatitude, double myLongitude) {
-		this.coordinate = new SphericCoordinate(myLatitude, myLongitude, 6378.137);
+		this.coordinate = SphericCoordinate.makeSphericCoordinate(myLatitude, myLongitude, 6378.137);
 	}
 	
 	/**

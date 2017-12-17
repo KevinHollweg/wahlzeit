@@ -12,18 +12,31 @@ public class CartesianCoordinate extends AbstractCoordinate{
 	private double z;
 	
 	/**
+	 * constructor method , takes x, y, z values as parameters 
+	 * @param x
+	 * @param y
+	 * @param z
+	 */
+	public static CartesianCoordinate makeCartesianCoordinate(double x, double y, double z) {
+		CartesianCoordinate temp = new CartesianCoordinate(x, y, z);
+		for(int i = 0; i < CoordinateListCart.size(); i++) {
+			if(temp.isEqual(CoordinateListCart.get(i))) {
+				return CoordinateListCart.get(i).asCartesianCoordinate();
+			}
+		}
+		CoordinateListCart.add(temp);
+		return temp;
+	}
+	
+	/**
 	 * constructor, takes x, y, z values as parameters 
 	 * @param x
 	 * @param y
 	 * @param z
 	 */
-	public CartesianCoordinate(double x, double y, double z) {
+	protected CartesianCoordinate(double x, double y, double z) {
 		//Precondition
-		assert x <= Double.MAX_VALUE : "x value is too large";
-		assert y <= Double.MAX_VALUE : "y value is too large";
-		assert z <= Double.MAX_VALUE : "z value is too large";
-		
-		if(x <= Double.MAX_VALUE || y <= Double.MAX_VALUE || z <= Double.MAX_VALUE) {
+		if(x >= Double.MAX_VALUE || y >= Double.MAX_VALUE || z >= Double.MAX_VALUE) {
 			throw new IllegalArgumentException("The given values aren't vaild!");
 		}
 		
@@ -113,7 +126,6 @@ public class CartesianCoordinate extends AbstractCoordinate{
 		//class invariant
 		assertClassInvariants();
 		//Precondition
-		assert coords != null : "null was given as Method argument";
 		if(coords == null){
 			throw new IllegalArgumentException("Null was given as an parameter!");
 		}
@@ -121,7 +133,6 @@ public class CartesianCoordinate extends AbstractCoordinate{
 		double underRoot = doGetCartesianDistance(coords);
 		
 		//Postcondition
-		assert underRoot >= 0 : "overflow detected";
 		if(underRoot < 0) {
 			throw new IllegalStateException("Distance wasn't calculated correctly!");
 		}
@@ -168,8 +179,7 @@ public class CartesianCoordinate extends AbstractCoordinate{
 		
 		SphericCoordinate result = doAsSphericCoordinate();
 		
-		//Postcondition
-		assert result != null : "creation of new SphericCoordinate object failed";		
+		//Postcondition	
 		if(result == null){
 			throw new IllegalArgumentException("Could not create new SphericCoordinate object!");
 		}
@@ -199,7 +209,7 @@ public class CartesianCoordinate extends AbstractCoordinate{
 		} else {
 			latitude = Math.atan(this.y / this.x);
 		}	
-		SphericCoordinate result = new SphericCoordinate(latitude, longitude, radius);
+		SphericCoordinate result = SphericCoordinate.makeSphericCoordinate(latitude, longitude, radius);
 		
 		return result;
 	}
@@ -216,7 +226,6 @@ public class CartesianCoordinate extends AbstractCoordinate{
 		//class invariant
 		assertClassInvariants();
 		//Precondition
-		assert coords != null : "null was given as method argument";
 		if(coords == null){
 			throw new IllegalArgumentException("Null was given as an parameter!");
 		}
@@ -225,7 +234,6 @@ public class CartesianCoordinate extends AbstractCoordinate{
 		double result = spherCoords.getSphericDistance(coords);
 		
 		//Postcondition
-		assert result >= 0 : "getSphericDistance() produced an calculation error";
 		if(result < 0) {
 			throw new IllegalStateException("Distance wasn't calculated correctly!");
 		}
@@ -254,17 +262,15 @@ public class CartesianCoordinate extends AbstractCoordinate{
 	 */
 	@Override
 	protected void assertClassInvariants() {
-		assert this.x != Double.NaN : "No valid value for X";
-		assert this.y != Double.NaN : "No valid value for Y";
-		assert this.z != Double.NaN : "No valid value for Z";
-		
-		assert this.x != Double.POSITIVE_INFINITY : "Value for X too big";
-		assert this.y != Double.POSITIVE_INFINITY : "Value for Y too big";
-		assert this.z != Double.POSITIVE_INFINITY : "Value for Z too big";
-		
-		assert this.x != Double.NEGATIVE_INFINITY : "Value for X too small";
-		assert this.x != Double.NEGATIVE_INFINITY : "Value for Y too small";
-		assert this.x != Double.NEGATIVE_INFINITY : "Value for Z too small";
+		if(this.x == Double.NaN ||  this.x == Double.POSITIVE_INFINITY || this.x == Double.NEGATIVE_INFINITY) {
+			throw new IllegalArgumentException("No valid value for x!");
+		}
+		if(this.y == Double.NaN ||  this.y == Double.POSITIVE_INFINITY || this.y == Double.NEGATIVE_INFINITY) {
+			throw new IllegalArgumentException("No valid value for y!");
+		}
+		if(this.z == Double.NaN ||  this.z == Double.POSITIVE_INFINITY || this.z == Double.NEGATIVE_INFINITY) {
+			throw new IllegalArgumentException("No valid value for z!");
+		}
 	}
 
 }

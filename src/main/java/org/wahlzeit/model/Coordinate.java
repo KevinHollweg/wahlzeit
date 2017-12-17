@@ -13,4 +13,6 @@ public interface Coordinate {
 	public double getDistance(Coordinate coords);
 	
 	public boolean isEqual(Coordinate coords);
+	
+	//public CartesianCoordinate makeCartesianCoordinate(double x, double y, double z);
 }

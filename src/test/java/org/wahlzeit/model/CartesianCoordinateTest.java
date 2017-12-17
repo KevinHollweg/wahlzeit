@@ -16,8 +16,8 @@ public class CartesianCoordinateTest {
 	
 	@Before
 	public void initial() {
-		baseCoordinate = new CartesianCoordinate(0.0, 0.0, 0.0);
-		customCoordinate = new CartesianCoordinate(3.0, 5.0, 1.0);
+		baseCoordinate = CartesianCoordinate.makeCartesianCoordinate(0.0, 0.0, 0.0);
+		customCoordinate = CartesianCoordinate.makeCartesianCoordinate(3.0, 5.0, 1.0);
 	}
 	
 	@Test
@@ -39,19 +39,24 @@ public class CartesianCoordinateTest {
 	
 	@Test
 	public void testDistance() {
-		CartesianCoordinate distant = new CartesianCoordinate(2.0, 3.0, 4.0);
+		CartesianCoordinate distant = CartesianCoordinate.makeCartesianCoordinate(2.0, 3.0, 4.0);
 		double distance0 = Math.sqrt((2.0 * 2.0) + (3.0 * 3.0) + (4.0 * 4.0));
 		double distance1 = Math.sqrt(((2.0 - 3.0) * (2.0 - 3.0)) + ((3.0 - 5.0) * (3.0 - 5.0)) + ((4.0 - 1.0) * (4.0 - 1.0)));
 		assertEquals(distance0, baseCoordinate.getDistance(distant), 0.0001);
 		assertEquals(distance1, customCoordinate.getDistance(distant), 0.0001);
-		assertEquals(distant.getDistance(null), -1.0, 0.1);
+		try {
+			distant.getDistance(null);
+		} catch (IllegalArgumentException e) {
+			assertEquals(e.getMessage(), "Null was given as an parameter!");
+		}
+		
 		
 	}
 	
 	@Test
 	public void testCoordinateEquals() {
-		CartesianCoordinate testPoint0 = new CartesianCoordinate(3.0, 5.0, 1.0);
-		CartesianCoordinate testPoint1  = new CartesianCoordinate(3.1, 4.0, 1.5);
+		CartesianCoordinate testPoint0 = CartesianCoordinate.makeCartesianCoordinate(3.0, 5.0, 1.0);
+		CartesianCoordinate testPoint1  = CartesianCoordinate.makeCartesianCoordinate(3.1, 4.0, 1.5);
 		assertTrue(customCoordinate.isEqual(testPoint0));
 		assertTrue(customCoordinate.equals(testPoint0));
 		assertFalse(baseCoordinate.isEqual(testPoint1));
@@ -62,13 +67,13 @@ public class CartesianCoordinateTest {
 	
 	@Test
 	public void testConversionToSphericCoordinates() {
-		CartesianCoordinate testPoint0 = new CartesianCoordinate(0.0, 0.0, 0.0);
-		CartesianCoordinate testPoint1  = new CartesianCoordinate(1.0, 2.0, 3.0);
-		SphericCoordinate diffPoint0 = new SphericCoordinate(0.0, 0.0, 0.0);
+		CartesianCoordinate testPoint0 = CartesianCoordinate.makeCartesianCoordinate(0.0, 0.0, 0.0);
+		CartesianCoordinate testPoint1  = CartesianCoordinate.makeCartesianCoordinate(1.0, 2.0, 3.0);
+		SphericCoordinate diffPoint0 = SphericCoordinate.makeSphericCoordinate(0.0, 0.0, 0.0);
 		double rad = Math.sqrt(1.0 * 1.0 + 2.0 * 2.0 + 3.0 * 3.0);
 		double longi = Math.acos(3.0 / rad);
 		double lati = Math.atan(2.0 / 1.0);
-		SphericCoordinate diffPoint1 = new SphericCoordinate(lati, longi, rad);
+		SphericCoordinate diffPoint1 = SphericCoordinate.makeSphericCoordinate(lati, longi, rad);
 		assertTrue(testPoint0.asSphericCoordinate().isEqual(diffPoint0));
 		assertTrue(testPoint1.asSphericCoordinate().isEqual(diffPoint1));
 		assertFalse(testPoint0.asSphericCoordinate().isEqual(diffPoint1));
