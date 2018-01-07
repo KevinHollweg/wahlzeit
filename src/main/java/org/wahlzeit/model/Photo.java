@@ -17,6 +17,7 @@
  * License along with this program. If not, see
  * <http://www.gnu.org/licenses/>.
  */
+// abstract factory => abstract product
 
 package org.wahlzeit.model;
 
@@ -34,6 +35,12 @@ import org.wahlzeit.services.ObjectManager;
 
 import java.util.Map;
 
+/*@PatternInstance(
+ 	patternName = "Abstract Factory"
+ 	participants = {
+ 		"AbstractProduct"
+ 	}
+)*/
 /**
  * A photo represents a user-provided (uploaded) photo.
  */

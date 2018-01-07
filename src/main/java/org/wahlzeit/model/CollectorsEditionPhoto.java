@@ -2,6 +2,12 @@ package org.wahlzeit.model;
 
 import com.googlecode.objectify.annotation.Subclass;
 
+/*@PatternInstance(
+	patternName = "Concrete Factory"
+	participants = {
+		"ConcreteProduct"
+	}
+)*/
 @Subclass
 public class CollectorsEditionPhoto extends Photo{
 	

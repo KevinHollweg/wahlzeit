@@ -1,6 +1,11 @@
 package org.wahlzeit.model;
 
-
+/*@PatternInstance(
+	patternName = "Value Object"
+	participants = {
+		"ValueObject"	
+	}
+)*/
 public class SphericCoordinate extends AbstractCoordinate{
 	
 	private double latitude;

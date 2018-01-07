@@ -3,6 +3,12 @@ package org.wahlzeit.model;
 import java.util.ArrayList;
 import java.util.List;
 
+/*@PatternInstance(
+	patternName = "Value Object"
+	participants = {
+			"ValueObject"	
+	}
+)*/
 public abstract class AbstractCoordinate implements Coordinate{
 	
 	@Override
