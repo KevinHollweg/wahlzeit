@@ -3,12 +3,12 @@ package org.wahlzeit.model;
 //value object
 import com.googlecode.objectify.annotation.Entity;
 
-/*@PatternInstance(
-	patternName = "Value Object"
+@PatternInstance(
+	patternName = "Value Object",
 	participants = {
 		"ValueObject"	
 	}
-)*/
+)
 
 @Entity
 public class CartesianCoordinate extends AbstractCoordinate{

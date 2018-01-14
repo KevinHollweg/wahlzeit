@@ -2,16 +2,17 @@ package org.wahlzeit.model;
 
 import com.googlecode.objectify.annotation.Subclass;
 
-/*@PatternInstance(
-	patternName = "Concrete Factory"
+@PatternInstance(
+	patternName = "Abstract Factory",
 	participants = {
-		"ConcreteProduct"
+		"AbstractProduct"
 	}
-)*/
+)
 @Subclass
 public class CollectorsEditionPhoto extends Photo{
 	
-	public int preis = 0;
+	// This line 
+	//public CollectorsEdition CollectorsEdition;
 
 	/**
 	 * @methodtype constructor 
@@ -30,7 +31,8 @@ public class CollectorsEditionPhoto extends Photo{
 			throw new IllegalArgumentException("Null was given as an parameter!");
 		}
 		super.id = myId;
-		
+		// This line
+		//this.CollectorsEdition = CollectorsEditionManager.createCollectorsEdition();
 		incWriteCount();
 	}
 	

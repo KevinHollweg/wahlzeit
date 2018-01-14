@@ -9,12 +9,18 @@ import org.wahlzeit.model.CollectorsEditionPhoto;
 import org.wahlzeit.model.Globals;
 import org.wahlzeit.model.Guest;
 import org.wahlzeit.model.Moderator;
+import org.wahlzeit.model.PatternInstance;
 import org.wahlzeit.model.Photo;
 import org.wahlzeit.model.PhotoCase;
 import org.wahlzeit.model.Tag;
 import org.wahlzeit.model.User;
 import org.wahlzeit.model.persistence.DatastoreAdapter.ImageWrapper;
-
+@PatternInstance(
+	patternName = "Adapter",
+	participants = {
+		"Adapter"	
+	}
+)
 /**
  * A badly named class, to be renamed to ObjectifyService first, something better later.
  * 
