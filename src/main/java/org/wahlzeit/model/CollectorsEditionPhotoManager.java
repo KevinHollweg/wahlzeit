@@ -6,8 +6,8 @@ import java.util.logging.Logger;
 
 public class CollectorsEditionPhotoManager extends PhotoManager{
 	
-	//protected static final CollectorsEditionPhotoManager instance = new CollectorsEditionPhotoManager();
-	protected static final PhotoManager instance = new PhotoManager();
+	protected static final CollectorsEditionPhotoManager instance = new CollectorsEditionPhotoManager();
+	//protected static final PhotoManager instance = new PhotoManager();
 	
 	//private static final Logger log = Logger.getLogger(CollectorsEditionPhotoManager.class.getName());
 	private static final Logger log = Logger.getLogger(PhotoManager.class.getName());
@@ -18,8 +18,8 @@ public class CollectorsEditionPhotoManager extends PhotoManager{
 	 * @methodtype factory
 	 */
 	public CollectorsEditionPhotoManager() {
-		//super.photoTagCollector = CollectorsEditionPhotoFactory.getInstance().createPhotoTagCollector();	
-		super.photoTagCollector = PhotoFactory.getInstance().createPhotoTagCollector();
+		super.photoTagCollector = CollectorsEditionPhotoFactory.getInstance().createPhotoTagCollector();	
+		//super.photoTagCollector = PhotoFactory.getInstance().createPhotoTagCollector();
 	}
 	
 	//public static final CollectorsEditionPhotoManager getInstance() {

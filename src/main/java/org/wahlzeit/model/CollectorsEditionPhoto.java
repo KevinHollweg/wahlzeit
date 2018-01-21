@@ -1,5 +1,6 @@
 package org.wahlzeit.model;
 
+import com.googlecode.objectify.annotation.Serialize;
 import com.googlecode.objectify.annotation.Subclass;
 
 @PatternInstance(
@@ -11,14 +12,15 @@ import com.googlecode.objectify.annotation.Subclass;
 @Subclass
 public class CollectorsEditionPhoto extends Photo{
 	
-	// This line 
-	//public CollectorsEdition CollectorsEdition;
+	@Serialize 
+	public CollectorsEdition CollectorsEdition;
 
 	/**
 	 * @methodtype constructor 
 	 */
 	public CollectorsEditionPhoto() {
 		super.id = PhotoId.getNextId();
+		this.CollectorsEdition = CollectorsEditionManager.createCollectorsEdition();
 		incWriteCount();
 	}
 	
@@ -31,8 +33,8 @@ public class CollectorsEditionPhoto extends Photo{
 			throw new IllegalArgumentException("Null was given as an parameter!");
 		}
 		super.id = myId;
-		// This line
-		//this.CollectorsEdition = CollectorsEditionManager.createCollectorsEdition();
+
+		this.CollectorsEdition = CollectorsEditionManager.createCollectorsEdition();
 		incWriteCount();
 	}
 	

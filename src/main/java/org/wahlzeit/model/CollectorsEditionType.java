@@ -1,7 +1,16 @@
 package org.wahlzeit.model;
 
-public class CollectorsEditionType {
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
 
+import org.wahlzeit.services.DataObject;
+
+public class CollectorsEditionType extends DataObject{
+
+	private static final long serialVersionUID = 1L;
+	protected CollectorsEditionType superType = null;
+	protected Set<CollectorsEditionType> subTypes = new HashSet<CollectorsEditionType>();
 	/**
 	 * As attributes the Collectors Edition Type has references to the most common items included in Collectors Editions
 	 */
@@ -35,6 +44,47 @@ public class CollectorsEditionType {
 		this.has_map = map;
 		this.has_soundtrack = soundtrack;
 		this.has_figure = figure;
+	}
+	
+	public CollectorsEditionType getSuperType() {
+		return superType;
+	}
+	
+	public void setSuperType(CollectorsEditionType CEt) {
+		assert (CEt != null) : "tried to set null sub-type";
+		this.superType = CEt;
+	}
+	
+	public Iterator<CollectorsEditionType> getSubTypeIterator() {
+		return subTypes.iterator();
+	}
+	
+	public void addSubType(CollectorsEditionType CEt) {
+		assert (CEt != null) : "tried to set null sub-type";
+		CEt.setSuperType(this);
+		subTypes.add(CEt);
+	}
+	
+	public boolean isSubType(CollectorsEditionType CEt) {
+		assert (CEt != null) : "tried to set null sub-type";
+		if(this.superType == CEt) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public boolean hastInstance(CollectorsEdition CE) {
+		assert (CE != null) : "asked about null object";
+		if(CE.getCollectorsEditionType() == this) {
+			return true;
+		}
+		for(CollectorsEditionType type : subTypes) {
+			if(type.hastInstance(CE)) {
+				return true;
+			}
+		}
+		return false;
 	}
 	/**
 	 * Factory method for CollectorsEditionType with default values
